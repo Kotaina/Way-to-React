@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 
 const Search = ({ value, onChange, children }) =>
     <form>
@@ -8,5 +7,3 @@ const Search = ({ value, onChange, children }) =>
             onChange={onChange}
         />
     </form>
-
-export default Search;

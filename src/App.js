@@ -1,8 +1,8 @@
 import './App.css';
 import { Component } from 'react';
-import { Search } from "./search.js";
-import { Table } from "./table.js";
-import { Button } from "./button.js";
+// import { Search } from "./search.js";
+// import { Table } from "./table.js";
+// import { Button } from "./button.js";
 
 const list = [
   {
@@ -30,6 +30,49 @@ const list = [
     objectID: 0
   }
 ];
+
+const Search = ({ value, onChange, children }) =>
+  <form>
+    {children} <input
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  </form>
+
+const Table = ({ list, pattern, onDismiss }) => {
+  return (
+    <div>
+      {list.filter(isSearched(pattern)).map(item =>
+        <div>
+          <span>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span>{item.author}</span>
+          <span>{item.num_comments}</span>
+          <span>{item.points}</span>
+          <span>
+            <Button
+              onClick={() => onDismiss(item.objectID)}
+            >
+              Отбросить
+                  </Button>
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+const Button = ({ onClick, className = "", children }) =>
+  <button
+    onClick={onClick}
+    className={className}
+    type="button"
+  >
+    {children}
+  </button>
+
 
 const isSearched = searchTerm => item =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
@@ -76,8 +119,6 @@ class App extends Component {
     )
   }
 }
-
-
 
 
 export default App;
